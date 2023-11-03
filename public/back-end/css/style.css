@@ -199,7 +199,7 @@ ul.sidebar-menu li a.active i {
     transition:all .3s ease-in-out;
 }
 .footer {
-    background: #d19a98;
+    background: #a8a0a0;
     padding: 20px;
 }
 .footer p {
@@ -236,7 +236,7 @@ ul.sidebar-menu li a.active i {
     width:100%;
 }
 .brand {
-    background:#8b5c7e;
+    background:#4a6b8a;
     float:left;
     width:240px;
     height:80px;
@@ -598,7 +598,7 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
     float:left;
     margin-top:23px;
     margin-left:-15px;
-    background:#8b5c7e;
+    background:#9c8d98;
     border-radius:50%;
     -webkit-border-radius:50%;
     width:32px;
@@ -2420,7 +2420,7 @@ input.ggg{
     outline: none;
 	display: table;
     cursor: pointer;
-    margin: 45px auto 31px;
+    margin: 45px 30px 31px;
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
     -o-transition: 0.5s all;

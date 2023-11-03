@@ -10,13 +10,13 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller {
 
-    public function AuthLogin(Request $request){
-        if (Auth::check()) {
-            return redirect()->route('auth.dashboard');
-        } else {
-            return redirect()->route('auth.admin');
-        }
-    }
+    // public function AuthLogin(Request $request){
+    //     if (Auth::check()) {
+    //         return redirect()->route('auth.dashboard');
+    //     } else {
+    //         return redirect()->route('auth.admin');
+    //     }
+    // }
 
     public function index(){
         return view('admin-login');
@@ -41,7 +41,6 @@ class AdminController extends Controller {
 
     public function logout()
     {
-        // Auth::logout();
-        return redirect()->route('auth.login');
+        return view('admin-login');
     }
 }

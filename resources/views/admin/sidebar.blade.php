@@ -58,9 +58,8 @@
                     <span>Bình luận</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="form_component.html">Form Elements</a></li>
-                    <li><a href="form_validation.html">Form Validation</a></li>
-                    <li><a href="dropzone.html">Dropzone</a></li>
+                    <li><a href="{{ route('list_comment')}}">QL bình luận</a></li>
+                   
                 </ul>
             </li>
             

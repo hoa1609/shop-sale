@@ -5,23 +5,32 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryProduct;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
 
 
-/*  FONTEND */
-Route::get('/', function () { return view('Pages.home');});
-Route::get('trang-chu', function () { return view('Pages.home');});
+/*  HOME */
+Route::get('trang-chu', [HomeController::class,'index']);                                                
+Route::get('/', [HomeController::class,'index']);       
+
+
+
+/*  DANH MỤC TRANG CHỦ SẢN PHAM */
+Route::get('danh-muc-san-pham/{category_id}', [CategoryProduct::class,'show_category_home'])->name('danh-muc-san-pham');                                                
+Route::get('thuong-hieu-san-pham/{brand_id}', [BrandController::class,'show_brand_home'])->name('thuong-hieu-san-pham');                                                
+Route::get('chi-tiet-san-pham/{product_id}', [ProductController::class,'details_product'])->name('chi-tiet-san-pham');                                                
 
 
 
 /*  CATEGORY PRODUCT  */
-Route::get('add-category-product', [CategoryProduct::class,'add_category_product'])->name('add-category-product');                                                //
-Route::get('all-category-product', [CategoryProduct::class,'all_category_product'])->name('all-category-product');                                               //
-Route::post('save-category-product', [CategoryProduct::class,'save_category_product'])->name('save-category-product');                                          //
+Route::get('add-category-product', [CategoryProduct::class,'add_category_product'])->name('add-category-product');                                                
+Route::get('all-category-product', [CategoryProduct::class,'all_category_product'])->name('all-category-product');                                               
+Route::post('save-category-product', [CategoryProduct::class,'save_category_product'])->name('save-category-product');                                          
 Route::get('edit-category-product/{cate_pro_id}', [CategoryProduct::class, 'edit_category_product_form'])->name('edit-category-product-form');
 Route::post('update-category-product/{cate_pro_id}', [CategoryProduct::class, 'update_category_product'])->name('update-category-product');
 Route::delete('delete-category-product/{cate_pro_id}', [CategoryProduct::class, 'delete_category_product'])->name('delete-category-product');
-Route::get('unactive-category-product/{cate_pro_id}', [CategoryProduct::class,'unactive_category_product'])->name('unactive-category-product');                                        //
-Route::get('active-category-product/{cate_pro_id}', [CategoryProduct::class,'active_category_product'])->name('active-category-product');                                             //
+Route::get('unactive-category-product/{cate_pro_id}', [CategoryProduct::class,'unactive_category_product'])->name('unactive-category-product');                                        
+Route::get('active-category-product/{cate_pro_id}', [CategoryProduct::class,'active_category_product'])->name('active-category-product');                                            
 
 
 
@@ -39,7 +48,6 @@ Route::prefix('brand-product')->group(function () {
 
 
 
-
 /* PRODUCT  */
 Route::group(['prefix' => 'products'], function () {
     Route::get('add-product', [ProductController::class, 'add_product'])->name('add-product');
@@ -50,13 +58,31 @@ Route::group(['prefix' => 'products'], function () {
     Route::delete('delete-product/{pro_id}', [ProductController::class, 'delete_product'])->name('delete-product');
     Route::get('unactive-product/{pro_id}', [ProductController::class, 'unactive_product'])->name('unactive-product');
     Route::get('active-product/{pro_id}', [ProductController::class, 'active_product'])->name('active-product');
-});                                        
+    // gửi bình luận
+    Route::get('list-comment', [ProductController::class, 'list_comment'])->name('list_comment');
+
+    Route::post('load_comment', [ProductController::class, 'load_comment'])->name('load_comment');
+    Route::post('send_comment', [ProductController::class, 'send_comment'])->name('send_comment');
+}); 
+
+
+
+
+/*  CART  */
+Route::post('save-cart', [CartController::class, 'save_cart'])->name('save-cart');
+
+
+
+
+
+
+
 
 
 
 /*  USER  */
 Route::group(['prefix' =>'user'], function () { 
-    Route::get('user-admin-login', [UserController::class,'index'])->name('user.index');                                                    //name user.index để lấy route kết nối khi click
+    Route::get('user-admin-login', [UserController::class,'index'])->name('user.index');                                         //name user.index để lấy route kết nối khi click
     Route::post('them-user', [UserController::class, 'addUsers'])->name('addUser');                                            // xử lí thêm user 
     Route::get('edit-user/{id}', [UserController::class,'editUser'])->name('user.edit');                                      //đưa dữ liệu ra để edit(lấy $id, $user)
     Route::put('update-user/{id}', [UserController::class, 'updateUser'])->name('user.update');                              //edit
@@ -67,17 +93,8 @@ Route::group(['prefix' =>'user'], function () {
 });
   
 
-
-
 /* ADMIN LOGIN */
 Route::get('admin', [AdminController::class, 'index'])->name('auth.admin');                                         //login 
-
 Route::get('dashboard', [AdminController::class, 'show_dashboard'])->name('auth.dashboard');                        // page index quan li
 Route::post('admin-dashboard', [AdminController::class, 'dashboard'])->name('auth.login');                   // xử lí input email và pass login  + Requests/authRequest.php
 Route::get('logout', [AdminController::class, 'logout'])->name('logout');     
-
-// Route::get('login', [AdminController::class, 'AuthLogin'])->name('login');                                                        // out
-
-// Route::middleware(['auth.check'])->group(function () {
-//     Route::get('/dashboard', 'AdminController@show_dashboard')->name('auth.dashboard');
-// });

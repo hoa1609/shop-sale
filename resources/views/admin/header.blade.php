@@ -25,7 +25,7 @@
             <ul class="dropdown-menu extended logout">
                 <li><a href="#"><i class=" fa fa-suitcase"></i>Thông tin</a></li>
                 <li><a href="#"><i class="fa fa-cog"></i> Cài đặt</a></li>
-                <li><a href="{{route('auth.logout')}}"><i class="fa fa-key"></i> Đăng suất</a></li>
+                <li><a href="{{route('logout')}}"><i class="fa fa-key"></i> Đăng suất</a></li>
             </ul>
         </li>
        

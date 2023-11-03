@@ -3,13 +3,13 @@
 
         <div class="row wrapper1 border-bottom white-bg page-heading">  
             <div class="col-lg-10">
-                <h3>Quản lí sản phẩm</h3>
+                <h3>Quản lí bình luận</h3>
                 <ol class="breadcrumb">
                     <li>
                         <a href="index.html">Dashhboard</a>
                     </li>
                     <li class="active">
-                        <strong>Quản lí sản phẩm</strong>
+                        <strong>Quản lí bình luận</strong>
                     </li>
                 </ol>
             </div>
@@ -44,60 +44,41 @@
                 <table class="table table-striped b-t b-light">
                 <thead>
                     <tr>
-                    <th style="width:20px;">
-                        <label class="i-checks m-b-none">
-                        <input type="checkbox"><i></i>
-                        </label>
-                    </th>
-                    <th>Tên sản phẩm</th>
-                    <th>Giá</th>
-                    <th>Hình ảnh</th>
-                    <th>Danh mục</th>
-                    <th>Thương hiệu</th>
-                    <th class="text-center">Hiển thị</th>
-                    <th class="text-center"> Thao tác</th>
+                        <th>Duyệt</th>
+                        <th>Tên người gửi</th>
+                        <th>Bình luận</th>
+                        <th>Ngày gửi</th>
+                        <th>sản phẩm</th>
+                        <th>Quản lí</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach ($all_product as $key =>$_pro )
+                    {{-- @foreach ($comment as $key =>$comm )
                         <tr>
-                            <td>
-                                <label class="i-checks m-b-none">
-                                    <input type="checkbox" name="post[]"><i></i>
-                                </label>
-                            </td>
-
-                                <td>{{ $_pro -> product_name }}</td>
-                                <td>{{ $_pro -> product_price }}</td>
                                 <td>
-                                    <img src="{{ asset('upload/product/' . $_pro-> product_image) }}" width="100px" height="100px">
+                                    @if ($comm-> comment_status == 1 )
+                                            <input type="button" data-comment_id="{{ $comm-> comment_id }}" id="{{$comm->comment_product_id}}" 
+                                            class="btn btnn-primary btn-xs comment_duyet_btn" value="duyệt">
+                                        @else 
+                                            <input type="button" data-comment_id="{{ $comm-> comment_id }}" id="{{$comm->comment_product_id}}" 
+                                            class="btn btnn-danger btn-xs comment_boduyet_btn" value="bỏ duyệt">
+                                    @endif
+                                    {{ $comm -> comment_status }}
                                 </td>
-                                <td>{{ $_pro -> category_name }}</td>
-                                <td>{{ $_pro -> brand_name }}</td>
+
+                                <td>{{ $comm -> comment_name }}</td>
+                                <td>{{ $comm -> comment }}</td>
+                                <td>{{ $comm -> comment_date }}</td>
+                                <td>{{ $comm -> comment_product_id }}</td>
+                                <td>{{ $comm -> comment_date }}</td>
 
                             <td class="text-center">
                                 <span class="text-ellipsis">
-
-                                        <?php
-                                            if ($_pro ->product_status == 0){
-                                                ?>
-                                                <a href="{{ route('unactive-product',$_pro ->product_id)}}"> 
-                                                    <input type="checkbox" class="js-switch" checked /> 
-                                                </a>
-                                                <?php
-                                            }else {
-                                                ?>
-                                                <a href="{{ route('active-product',$_pro ->product_id)}}"> 
-                                                    <input type="checkbox" class="js-switch_2" checked />
-                                                </a>
-                                                <?php
-                                            }
-                                        ?>
                                 </span>
                             </td>
                             <td  class="text-center">
-                                    <a href="{{route('edit-product-form', $_pro ->product_id )}}" class="btn btn-success" style="zoom: .65"> 
+                                    <a href="" class="btn btn-success" style="zoom: .65"> 
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                     <form action="{{ route('delete-product', $_pro->product_id) }}" method="POST" style="display: inline;">
@@ -105,10 +86,10 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
                                     </form>
-                                    
                             </td>
                         </tr>
-                    @endforeach
+                    @endforeach --}}
+
                 </tbody>
                 </table>
             </div>
