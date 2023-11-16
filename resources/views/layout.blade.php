@@ -13,11 +13,7 @@
 	<link href="{{ asset('front-end/css/animate.css') }}" rel="stylesheet">
 	<link href="{{ asset('front-end/css/main.css') }}" rel="stylesheet">
 	<link href="{{ asset('front-end/css/responsive.css') }}" rel="stylesheet">
-	
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->   
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 
     <link rel="shortcut icon" href="{{asset('front-end/images/ico/favicon.ico')}}">
@@ -67,8 +63,40 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a href="{{ route('auth.admin')}}"><i class="fa fa-lock"></i> Login</a></li>
+
+						{{-- KT thanh toán --}}
+								<?php 
+								$customer_id = Session::get('customer_id');
+								if($customer_id != null){
+									?>
+									<li><a href="{{ route('checkout')}}"><i class="fa fa-shopping-cart"></i>Thanh toán</a></li>
+
+								<?php
+								}else {
+									?>
+									<li><a href="{{ route('login-checkout')}}"><i class="fa fa-lock"></i> Thanh toán</a></li>
+								<?php
+								}
+									?>
+						{{-- thanh toán end --}}
+
+								<li><a href="{{ route('show-cart')}}"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a></li>
+
+						{{--KT đăng nhập --}}
+								<?php 
+								$customer_id = Session::get('customer_id');
+								if($customer_id != null){
+									?>
+									<li><a href="{{ route('login-checkout')}}"><i class="fa fa-lock"></i> Đăng xuất</a></li>
+								<?php
+								}else {
+									?>
+									<li><a href="{{ route('login-checkout')}}"><i class="fa fa-lock"></i> Đăng nhập</a></li>
+								<?php
+								}
+									?>
+						{{-- đăng nhập end--}}
+
 							</ul>
 						</div>
 					</div>

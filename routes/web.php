@@ -7,11 +7,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
-
+use App\Http\Controllers\CheckoutController;
 
 /*  HOME */
 Route::get('trang-chu', [HomeController::class,'index']);                                                
 Route::get('/', [HomeController::class,'index']);       
+Route::post('tim-kiem', [HomeController::class,'search'])->name('search');       
 
 
 
@@ -67,15 +68,11 @@ Route::group(['prefix' => 'products'], function () {
 
 
 
-
 /*  CART  */
 Route::post('save-cart', [CartController::class, 'save_cart'])->name('save-cart');
-
-
-
-
-
-
+Route::get('show-cart', [CartController::class, 'show_cart'])->name('show-cart');
+Route::get('delete-cart/{rowId}', [CartController::class, 'delete_cart'])->name('delete-to-cart');
+Route::post('update-cart-quantity', [CartController::class, 'update_cart_quantity'])->name('update-cart-quantity');
 
 
 
@@ -83,7 +80,7 @@ Route::post('save-cart', [CartController::class, 'save_cart'])->name('save-cart'
 /*  USER  */
 Route::group(['prefix' =>'user'], function () { 
     Route::get('user-admin-login', [UserController::class,'index'])->name('user.index');                                         //name user.index để lấy route kết nối khi click
-    Route::post('them-user', [UserController::class, 'addUsers'])->name('addUser');                                            // xử lí thêm user 
+    Route::post('add-user', [UserController::class, 'addUsers'])->name('addUser');                                            // xử lí thêm user 
     Route::get('edit-user/{id}', [UserController::class,'editUser'])->name('user.edit');                                      //đưa dữ liệu ra để edit(lấy $id, $user)
     Route::put('update-user/{id}', [UserController::class, 'updateUser'])->name('user.update');                              //edit
     Route::delete('delete-user/{id}', [UserController::class, 'destroy'])->name('user.delete');                             //xoá
@@ -93,8 +90,24 @@ Route::group(['prefix' =>'user'], function () {
 });
   
 
+
+
 /* ADMIN LOGIN */
-Route::get('admin', [AdminController::class, 'index'])->name('auth.admin');                                         //login 
-Route::get('dashboard', [AdminController::class, 'show_dashboard'])->name('auth.dashboard');                        // page index quan li
-Route::post('admin-dashboard', [AdminController::class, 'dashboard'])->name('auth.login');                   // xử lí input email và pass login  + Requests/authRequest.php
+Route::get('admin', [AdminController::class, 'index'])->name('auth.admin');                                          
+Route::get('dashboard', [AdminController::class, 'show_dashboard'])->name('auth.dashboard')->middleware('login');                        // page index quan li
+Route::post('admin-dashboard', [AdminController::class, 'dashboard'])->name('auth.login');                                              // xử lí input email và pass login  + Requests/authRequest.php
 Route::get('logout', [AdminController::class, 'logout'])->name('logout');     
+
+
+
+/* CHECKOUT */
+Route::post('add-customer', [CheckoutController::class, 'add_customer'])->name('add-customer');     
+Route::get('login', [CheckoutController::class, 'login'])->name('login');    
+
+Route::post('save-checkout-customer', [CheckoutController::class, 'save_checkout_customer'])->name('save-checkout-customer');     
+Route::get('login-checkout', [CheckoutController::class, 'login_checkout'])->name('login-checkout');          // layout login/out
+Route::get('checkout', [CheckoutController::class, 'checkout'])->name('checkout');                          //shipping information
+Route::get('logout-checkout', [CheckoutController::class, 'logout_checkout'])->name('logout-checkout');     
+
+Route::get('paymen', [CheckoutController::class, 'paymen'])->name('paymen');   
+  

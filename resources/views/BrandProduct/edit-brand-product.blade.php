@@ -24,7 +24,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="brand_product_name">Tên danh mục</label>
-                                <input type="text" name="brand_product_name" class="form-control" placeholder="Nhập tên danh mục" value="{{ $edit_brand_product-> bbrand_name }}">
+                                <input type="text" name="brand_product_name" class="form-control" placeholder="Nhập tên danh mục" value="{{ $edit_brand_product-> brand_name }}">
                             </div>
                             <div class="form-group">
                                 <label for="brand_product_desc">Mô tả danh mục</label>

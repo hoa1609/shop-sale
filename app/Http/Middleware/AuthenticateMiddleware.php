@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Middleware;
+
+
 use Illuminate\Support\Facades\Auth;
-
-
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +18,7 @@ class AuthenticateMiddleware
     public function handle(Request $request, Closure $next): Response
     {
          if(Auth::id() == null){
-            return redirect()->route('auth.admin')->with('error','Bạn phải đăng nhập để xử dụng');
+            return redirect()->route('auth.admin')->with('error','Bạn phải đăng nhập để xử dụng. Bạn đang vượt link');
          }
         return $next($request);
     }

@@ -4,8 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CheckAuth
 {
@@ -16,9 +15,9 @@ class CheckAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
-            return $next($request);
+        if (!Session::has('email')) {
+            return redirect()->route('auth.admin'); 
         }
-        return redirect()->route('auth.admin')->with('error', 'Vui lòng đăng nhập để truy cập trang này.');
+        return $next($request);
     }
 }

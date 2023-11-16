@@ -30,7 +30,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="{{ asset('back-end/css/morris.css') }}" type="text/css"/>
 
 
-<!-- calendar -->
 <link rel="stylesheet" href="back-end/css/monthly.css">
 <!-- //font-awesome icons -->
 <!-- Gọi thư viện jQuery từ thư mục public/back-end/js -->
